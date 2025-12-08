@@ -1,7 +1,7 @@
 {
-  "name": "Rebuilding Thomas Journal",
-  "short_name": "RT Journal",
-  "start_url": "index.html",
+  "name": "Big Daddy's Broken Brain",
+  "short_name": "BDBB APP",
+  "start_url": "splash.html",
   "display": "standalone",
   "background_color": "#050008",
   "theme_color": "#050008",
@@ -18,3 +18,4 @@
     }
   ]
 }
+
