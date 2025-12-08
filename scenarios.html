@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scenario Profile</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #050008;
+      color: #ffd27f;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      min-height: 80px;
+      background: #12001a;
+      color: #ffe0a6;
+      border: 1px solid #ff00ff;
+      padding: 8px;
+      margin: 4px 0;
+    }
+    button {
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      background: #ff00ff;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 4px;
+      margin: 4px 0;
+    }
+    .feedback {
+      margin-top: 10px;
+      color: #8cff8c;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>Scenario: <span id="prompt"></span></h2>
+  <textarea id="response" placeholder="What would you do?"></textarea>
+  <button onclick="submitResponse()">Submit</button>
+  <div id="feedback" class="feedback"></div>
+  <button onclick="exportData()">Export for AI</button>
+
+  <script>
+    const scenarios = [
+      {prompt: "You're cut off in traffic by a reckless driver. What do you do?", ideal: "Breathe deeply and let it go to avoid escalation—shows emotional regulation."},
+      {prompt: "A close friend betrays your trust by sharing a secret. How do you respond?", ideal: "Express hurt calmly and set boundaries—builds assertiveness without resentment."},
+      {prompt: "You find a wallet with $100 cash on the street. What happens next?", ideal: "Turn it in to lost and found—demonstrates integrity over impulsivity."},
+      {prompt: "Your boss unfairly criticizes your work in a meeting. What's your reaction?", ideal: "Ask for specific feedback privately—turns conflict into growth."},
+      {prompt: "A family member asks for a large loan you're unsure about. Do you give it?", ideal: "Discuss terms and your limits first—balances empathy with responsibility."},
+      {prompt: "You're invited to a party but feel anxious in crowds. Do you go?", ideal: "Set a time limit or bring a friend—practices extraversion mindfully."},
+      {prompt: "A coworker takes credit for your idea. How do you handle it?", ideal: "Politely correct in the moment with facts—asserts confidence ethically."},
+      {prompt: "You receive bad news about your health. First thoughts?", ideal: "Seek facts and support—fosters resilience over panic."},
+      {prompt: "You're tempted to lie to avoid hurting someone's feelings. Do you?", ideal: "Offer gentle truth with kindness—promotes authenticity."},
+      {prompt: "A project fails due to your mistake. What now?", ideal: "Own it, apologize, and fix it—embodies accountability."}
+    ];
+    let data = JSON.parse(localStorage.getItem('scenarios')) || [];
+    function showPrompt() {
+      document.getElementById('prompt').textContent = scenarios[data.length % scenarios.length].prompt;
+    }
+    function submitResponse() {
+      const resp = document.getElementById('response').value;
+      const ideal = scenarios[data.length % scenarios.length].ideal;
+      document.getElementById('feedback').innerHTML = `<p>What you should do: ${ideal}</p>`;
+      data.push({prompt: document.getElementById('prompt').textContent, response: resp, ideal});
+      localStorage.setItem('scenarios', JSON.stringify(data));
+      showPrompt();
+      document.getElementById('response').value = '';
+    }
+    function exportData() {
+      const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'scenarios.json';
+      a.click();
+    }
+    showPrompt();
+  </script>
+</body>
+</html>

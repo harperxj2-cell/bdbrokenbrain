@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Gratitude</title>
+  <style>
+    body {
+      margin: 0; padding: 20px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #050008; color: #ffd27f;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    textarea, input[type="text"] {
+      width: 100%;
+      max-width: 100%;
+      background: #12001a;
+      color: #ffe0a6;
+      border: 1px solid #ff00ff;
+      padding: 8px;
+    }
+    textarea {
+      min-height: 80px;
+    }
+    input[type="date"], input[type="time"], input[type="number"] {
+      background: #12001a;
+      color: #ffe0a6;
+      border: 1px solid #ff00ff;
+      padding: 4px 6px;
+    }
+    .section-title {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      background: #ff00ff;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+    button.secondary { background: #444; }
+    .saved-message {
+      margin-top: 10px;
+      color: #8cff8c;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Daily Gratitude Entry</h1>
+
+  <!-- Date & Time -->
+  <div class="section-title">Date &amp; Time</div>
+  <label for="gratitudeDate">Date</label>
+  <input type="date" id="gratitudeDate">
+  <label for="gratitudeTime">Time</label>
+  <input type="time" id="gratitudeTime">
+
+  <!-- Overall Mood -->
+  <div class="section-title">Overall Mood</div>
+  <label for="moodRating">Rate 1–10</label>
+  <input type="number" id="moodRating" min="1" max="10">
+  <label for="moodEmotions">What emotions do you feel?</label>
+  <textarea id="moodEmotions"></textarea>
+
+  <!-- Gratitude core -->
+  <div class="section-title">Gratitude</div>
+  <label for="gratitudeList">Name 3–5 things you are grateful for.</label>
+  <textarea id="gratitudeList" placeholder="1)&#10;2)&#10;3)"></textarea>
+
+  <label for="positiveExperience">
+    Describe a single positive experience and how it made you feel.
+  </label>
+  <textarea id="positiveExperience"></textarea>
+
+  <label for="positiveQuote">
+    Say something good. (quote, affirmation, reminder, motivation)
+  </label>
+  <textarea id="positiveQuote"></textarea>
+
+  <!-- Reflections -->
+  <div class="section-title">Reflections / Notes</div>
+  <label for="reflections">Any reflections, acknowledgments, notes?</label>
+  <textarea id="reflections"></textarea>
+
+  <div class="buttons">
+    <button type="button" onclick="saveGratitude()">Save</button>
+    <button type="button" class="secondary" onclick="goBack()">Back to Dashboard</button>
+  </div>
+
+  <div id="savedMsg" class="saved-message"></div>
+
+  <script>
+    // Ensure entries array exists
+    if (!localStorage.getItem('entries')) {
+      localStorage.setItem('entries', JSON.stringify([]));
+    }
+
+    function saveGratitude() {
+      const date = document.getElementById('gratitudeDate').value || new Date().toISOString().slice(0,10);
+      const time = document.getElementById('gratitudeTime').value || '';
+      const moodRating = document.getElementById('moodRating').value || null;
+      const moodEmotions = document.getElementById('moodEmotions').value.trim();
+      const gratitudeList = document.getElementById('gratitudeList').value.trim();
+      const positiveExperience = document.getElementById('positiveExperience').value.trim();
+      const positiveQuote = document.getElementById('positiveQuote').value.trim();
+      const reflections = document.getElementById('reflections').value.trim();
+
+      if (!gratitudeList && !positiveExperience && !positiveQuote && !reflections) {
+        alert('Write at least one thing before saving.');
+        return;
+      }
+
+      const entries = JSON.parse(localStorage.getItem('entries'));
+      entries.push({
+        type: 'gratitude',
+        date,
+        time,
+        mood: {
+          rating: moodRating ? Number(moodRating) : null,
+          emotions: moodEmotions
+        },
+        gratitude: {
+          list: gratitudeList,
+          positiveExperience,
+          positiveQuote
+        },
+        reflections
+      });
+      localStorage.setItem('entries', JSON.stringify(entries));
+
+      document.getElementById('savedMsg').textContent = 'Saved!';
+      // Optionally clear fields except date/time
+      document.getElementById('moodRating').value = '';
+      document.getElementById('moodEmotions').value = '';
+      document.getElementById('gratitudeList').value = '';
+      document.getElementById('positiveExperience').value = '';
+      document.getElementById('positiveQuote').value = '';
+      document.getElementById('reflections').value = '';
+    }
+
+    function goBack() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

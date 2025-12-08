@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="manifest" href="manifest.webmanifest">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
+
+  <meta charset="UTF-8">
+  <title>Rebuilding Thomas – Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+    }
+    .dashboard-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1360px; /* match your image width */
+      margin: 0 auto;
+    }
+    .dashboard-bg {
+      width: 100%;
+      display: block;
+    }
+    .hotspot {
+      position: absolute;
+      cursor: pointer;
+      /* invisible box */
+      background: rgba(255, 255, 255, 0);
+    }
+    .hotspot:hover {
+      /* optional: faint outline while testing; set to 0 to hide */
+      outline: 1px solid rgba(255, 0, 255, 0.4);
+    }
+
+    /* Adjust these percentages to line up with your GRATITUDE / GOALS / EVENT / OVERVIEW art */
+    .hs-gratitude {
+      left: 5%;
+      top: 5%;
+      width: 20%;
+      height: 15%;
+    }
+    .hs-goals {
+      left: 30%;
+      top: 5%;
+      width: 20%;
+      height: 15%;
+    }
+    .hs-event {
+      left: 55%;
+      top: 5%;
+      width: 20%;
+      height: 15%;
+    }
+    .hs-overview {
+      left: 80%;
+      top: 5%;
+      width: 20%;
+      height: 15%;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <img src="main-dashboard.jpg" alt="Rebuilding Thomas Dashboard" class="dashboard-bg">
+
+    <!-- Invisible clickable regions -->
+    <a href="gratitude.html" class="hotspot hs-gratitude"></a>
+    <a href="goals.html"     class="hotspot hs-goals"></a>
+    <a href="event.html"     class="hotspot hs-event"></a>
+    <a href="overview.html"  class="hotspot hs-overview"></a>
+  </div>
+</body>
+</html>
