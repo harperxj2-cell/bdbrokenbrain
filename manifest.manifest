@@ -1,7 +1,7 @@
 {
   "name": "Big Daddy's Broken Brain",
   "short_name": "BDBB APP",
-  "start_url": "splash.html",
+  "start_url": "/bdbrokenbrain/splash.html",
   "display": "standalone",
   "background_color": "#050008",
   "theme_color": "#050008",
