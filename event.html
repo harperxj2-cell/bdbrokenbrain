@@ -15,7 +15,7 @@
       text-shadow: 0 0 10px #ff00ff;
     }
     label { display: block; margin-top: 12px; font-weight: bold; }
-    textarea, input[type="datetime-local"] {
+    textarea, input[type="date"] {
       width: 100%;
       max-width: 100%;
       background: #12001a;
@@ -26,9 +26,6 @@
     }
     textarea {
       min-height: 80px;
-    }
-    input[type="datetime-local"] {
-      padding: 4px 6px;
     }
     .section-title {
       margin-top: 20px;
@@ -62,6 +59,16 @@
 <body>
   <h1>Event Entry</h1>
 
+  <!-- Date up top -->
+  <div class="section-title">Date</div>
+  <label for="eventDate">Date</label>
+  <input type="date" id="eventDate">
+
+  <!-- What Happened & Resolution -->
+  <div class="section-title">What Happened & Resolution</div>
+  <label for="eventDescription">Describe the event and how it was resolved (if applicable)</label>
+  <textarea id="eventDescription" placeholder="What happened? What was the resolution?"></textarea>
+
   <!-- Symptoms & Behaviors -->
   <div class="section-title">Symptoms & Behaviors</div>
   <label for="symptoms">Mental (anxiety/irritability), Physical (headache/tension), Behavioral (withdrawal/fidgeting)</label>
@@ -72,11 +79,6 @@
   <label for="triggers">Events/thoughts before mood shift; External (work/social); Internal (negative thoughts/illness)</label>
   <textarea id="triggers" placeholder="Note triggers, situations, external/internal factors..."></textarea>
 
-  <!-- Date & Time -->
-  <div class="section-title">Date & Time</div>
-  <label for="datetime">Date & Time</label>
-  <input type="datetime-local" id="datetime">
-
   <div class="buttons">
     <button type="button" onclick="saveEvent()">Save</button>
     <button type="button" class="secondary" onclick="goBack()">Back to Dashboard</button>
@@ -85,23 +87,25 @@
   <div id="savedMsg" class="saved-message"></div>
 
   <script>
-    // Set current datetime
-    document.getElementById('datetime').valueAsDate = new Date();
+    // Set current date
+    document.getElementById('eventDate').valueAsDate = new Date();
 
     function saveEvent() {
-      const datetime = document.getElementById('datetime').value;
+      const eventDate = document.getElementById('eventDate').value;
+      const eventDescription = document.getElementById('eventDescription').value.trim();
       const symptoms = document.getElementById('symptoms').value.trim();
       const triggers = document.getElementById('triggers').value.trim();
 
-      if (!symptoms && !triggers) {
-        alert('Describe at least one symptom or trigger before saving.');
+      if (!eventDescription && !symptoms && !triggers) {
+        alert('Describe at least one event, symptom, or trigger before saving.');
         return;
       }
 
       let events = JSON.parse(localStorage.getItem('events') || '[]');
       events.push({
         type: 'event',
-        datetime,
+        date: eventDate,
+        description: eventDescription,
         symptoms,
         triggers
       });
@@ -109,6 +113,7 @@
 
       document.getElementById('savedMsg').textContent = 'Saved!';
       // Clear fields
+      document.getElementById('eventDescription').value = '';
       document.getElementById('symptoms').value = '';
       document.getElementById('triggers').value = '';
     }
