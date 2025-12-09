@@ -52,17 +52,29 @@
 
   <script>
     const scenarios = [
-      {prompt: "You're cut off in traffic by a reckless driver. What do you do?", ideal: "Breathe deeply and let it go to avoid escalation—shows emotional regulation."},
-      {prompt: "A close friend betrays your trust by sharing a secret. How do you respond?", ideal: "Express hurt calmly and set boundaries—builds assertiveness without resentment."},
-      {prompt: "You find a wallet with $100 cash on the street. What happens next?", ideal: "Turn it in to lost and found—demonstrates integrity over impulsivity."},
-      {prompt: "Your boss unfairly criticizes your work in a meeting. What's your reaction?", ideal: "Ask for specific feedback privately—turns conflict into growth."},
-      {prompt: "A family member asks for a large loan you're unsure about. Do you give it?", ideal: "Discuss terms and your limits first—balances empathy with responsibility."},
-      {prompt: "You're invited to a party but feel anxious in crowds. Do you go?", ideal: "Set a time limit or bring a friend—practices extraversion mindfully."},
-      {prompt: "A coworker takes credit for your idea. How do you handle it?", ideal: "Politely correct in the moment with facts—asserts confidence ethically."},
-      {prompt: "You receive bad news about your health. First thoughts?", ideal: "Seek facts and support—fosters resilience over panic."},
-      {prompt: "You're tempted to lie to avoid hurting someone's feelings. Do you?", ideal: "Offer gentle truth with kindness—promotes authenticity."},
-      {prompt: "A project fails due to your mistake. What now?", ideal: "Own it, apologize, and fix it—embodies accountability."}
-    ];
+  {prompt: "You see someone being bullied in public. Do you intervene or walk away?", ideal: "Intervene calmly or seek help—shows courage and empathy."},
+  {prompt: "You have to choose between a stable job and a risky opportunity. What do you pick?", ideal: "Weigh pros and cons, then decide based on values—balances security and growth."},
+  {prompt: "A stranger asks for directions but seems lost and anxious. How do you help?", ideal: "Give clear, patient directions—demonstrates kindness and clarity."},
+  {prompt: "You accidentally damage a friend’s property. What’s your next move?", ideal: "Admit it and offer to fix or replace—shows honesty and responsibility."},
+  {prompt: "You’re asked to give a speech at a party. Do you accept?", ideal: "Accept and prepare—practices self-confidence and communication."},
+  {prompt: "You discover a mistake that could harm someone if not reported. Do you speak up?", ideal: "Report it immediately—prioritizes safety and integrity."},
+  {prompt: "You feel overwhelmed by a task. Do you ask for help or keep going alone?", ideal: "Ask for help—builds collaboration and resilience."},
+  {prompt: "You witness a minor accident. What’s your first reaction?", ideal: "Check for injuries and call for help—shows quick thinking and care."},
+  {prompt: "You’re offered a favor you can’t repay. Do you accept?", ideal: "Accept graciously and offer thanks—demonstrates humility and gratitude."},
+  {prompt: "You feel unfairly blamed for something. How do you respond?", ideal: "Stay calm and explain your side—promotes fairness and self-respect."}
+  {prompt: "You’re feeling drained but have important tasks to finish. Do you push through or take a break?", ideal: "Take a short break to recharge—balances productivity and self-care."},
+  {prompt: "A friend pressures you to do something you’re uncomfortable with. How do you respond?", ideal: "Politely say no and explain your boundaries—shows assertiveness and self-respect."},
+  {prompt: "You have a disagreement with a family member. Do you argue or try to listen?", ideal: "Listen first, then share your perspective—fosters empathy and resolution."},
+  {prompt: "You see someone struggling with a heavy load. Do you offer help?", ideal: "Offer help if you can—demonstrates kindness and initiative."},
+  {prompt: "You receive a compliment you don’t feel you deserve. How do you react?", ideal: "Accept graciously and thank the person—practices humility and gratitude."},
+  {prompt: "You’re running late for an appointment. Do you rush or apologize and explain?", ideal: "Apologize and explain honestly—shows responsibility and consideration."},
+  {prompt: "You’re tempted to check your phone during a conversation. Do you resist?", ideal: "Resist and stay present—builds focus and respect for others."},
+  {prompt: "You feel jealous of a friend’s success. How do you handle it?", ideal: "Acknowledge your feelings and celebrate their success—promotes self-awareness and positivity."},
+  {prompt: "You’re asked to join a group activity you’re not interested in. Do you decline or participate?", ideal: "Decline politely—honors your boundaries and honesty."},
+  {prompt: "You make a mistake at work. Do you hide it or admit it?", ideal: "Admit it and offer to fix it—demonstrates integrity and accountability."}
+
+];
+
     let data = JSON.parse(localStorage.getItem('scenarios')) || [];
     function showPrompt() {
       document.getElementById('prompt').textContent = scenarios[data.length % scenarios.length].prompt;
