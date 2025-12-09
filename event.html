@@ -59,6 +59,11 @@
 <body>
   <h1>Event Entry</h1>
 
+  <!-- Button to Scenario Prompts -->
+  <div class="buttons">
+    <a href="scenarios.html"><button type="button">Scenario Prompts</button></a>
+  </div>
+
   <!-- Date up top -->
   <div class="section-title">Date</div>
   <label for="eventDate">Date</label>
@@ -68,11 +73,6 @@
   <div class="section-title">What Happened & Resolution</div>
   <label for="eventDescription">Describe the event and how it was resolved (if applicable)</label>
   <textarea id="eventDescription" placeholder="What happened? What was the resolution?"></textarea>
-
-  <!-- Situation Prompt -->
-  <div class="section-title">Situation Prompt</div>
-  <label for="situationPrompt">Describe a situation that occurred (or prompt you responded to)</label>
-  <textarea id="situationPrompt" placeholder="Describe the situation or prompt..."></textarea>
 
   <!-- Symptoms & Behaviors -->
   <div class="section-title">Symptoms & Behaviors</div>
@@ -98,11 +98,10 @@
     function saveEvent() {
       const eventDate = document.getElementById('eventDate').value;
       const eventDescription = document.getElementById('eventDescription').value.trim();
-      const situationPrompt = document.getElementById('situationPrompt').value.trim();
       const symptoms = document.getElementById('symptoms').value.trim();
       const triggers = document.getElementById('triggers').value.trim();
 
-      if (!eventDescription && !situationPrompt && !symptoms && !triggers) {
+      if (!eventDescription && !symptoms && !triggers) {
         alert('Fill out at least one section before saving.');
         return;
       }
@@ -112,7 +111,6 @@
         type: 'event',
         date: eventDate,
         description: eventDescription,
-        situationPrompt,
         symptoms,
         triggers
       });
@@ -121,7 +119,6 @@
       document.getElementById('savedMsg').textContent = 'Saved!';
       // Clear fields
       document.getElementById('eventDescription').value = '';
-      document.getElementById('situationPrompt').value = '';
       document.getElementById('symptoms').value = '';
       document.getElementById('triggers').value = '';
     }
