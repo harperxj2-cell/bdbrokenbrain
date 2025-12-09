@@ -69,58 +69,11 @@
   <label for="eventDescription">Describe the event and how it was resolved (if applicable)</label>
   <textarea id="eventDescription" placeholder="What happened? What was the resolution?"></textarea>
 
+  <!-- Situation Prompt -->
+  <div class="section-title">Situation Prompt</div>
+  <label for="situationPrompt">Describe a situation that occurred (or prompt you responded to)</label>
+  <textarea id="situationPrompt" placeholder="Describe the situation or prompt..."></textarea>
+
   <!-- Symptoms & Behaviors -->
   <div class="section-title">Symptoms & Behaviors</div>
-  <label for="symptoms">Mental (anxiety/irritability), Physical (headache/tension), Behavioral (withdrawal/fidgeting)</label>
-  <textarea id="symptoms" placeholder="Describe symptoms, behaviors, and changes..."></textarea>
-
-  <!-- Triggers & Stressors -->
-  <div class="section-title">Triggers & Stressors</div>
-  <label for="triggers">Events/thoughts before mood shift; External (work/social); Internal (negative thoughts/illness)</label>
-  <textarea id="triggers" placeholder="Note triggers, situations, external/internal factors..."></textarea>
-
-  <div class="buttons">
-    <button type="button" onclick="saveEvent()">Save</button>
-    <button type="button" class="secondary" onclick="goBack()">Back to Dashboard</button>
-  </div>
-
-  <div id="savedMsg" class="saved-message"></div>
-
-  <script>
-    // Set current date
-    document.getElementById('eventDate').valueAsDate = new Date();
-
-    function saveEvent() {
-      const eventDate = document.getElementById('eventDate').value;
-      const eventDescription = document.getElementById('eventDescription').value.trim();
-      const symptoms = document.getElementById('symptoms').value.trim();
-      const triggers = document.getElementById('triggers').value.trim();
-
-      if (!eventDescription && !symptoms && !triggers) {
-        alert('Describe at least one event, symptom, or trigger before saving.');
-        return;
-      }
-
-      let events = JSON.parse(localStorage.getItem('events') || '[]');
-      events.push({
-        type: 'event',
-        date: eventDate,
-        description: eventDescription,
-        symptoms,
-        triggers
-      });
-      localStorage.setItem('events', JSON.stringify(events));
-
-      document.getElementById('savedMsg').textContent = 'Saved!';
-      // Clear fields
-      document.getElementById('eventDescription').value = '';
-      document.getElementById('symptoms').value = '';
-      document.getElementById('triggers').value = '';
-    }
-
-    function goBack() {
-      window.location.href = 'index.html';
-    }
-  </script>
-</body>
-</html>
+  <label for
