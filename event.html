@@ -1,214 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Event/Prompts</title>
-  <style>
-    body {
-      margin: 0; padding: 20px;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #050008; color: #ffd27f;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px #ff00ff;
-    }
-    h2 {
-      margin-top: 24px;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    textarea, input[type="text"], input[type="date"], input[type="time"], input[type="number"] {
-      width: 100%;
-      max-width: 100%;
-      background: #12001a;
-      color: #ffe0a6;
-      border: 1px solid #ff00ff;
-      padding: 8px;
-    }
-    textarea { min-height: 80px; }
-    .buttons {
-      margin-top: 20px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    button {
-      padding: 8px 16px;
-      border: none;
-      cursor: pointer;
-      background: #ff00ff;
-      color: #fff;
-      font-weight: bold;
-      border-radius: 4px;
-    }
-    button.secondary { background: #444; }
-    .saved-message {
-      margin-top: 10px;
-      color: #8cff8c;
-      font-size: 0.9rem;
-    }
-    .centered-button {
-      text-align: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Entry</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; background: #f0f8ff; color: #333; } /* Your color scheme */
+        h1 { text-align: center; color: #2c5aa0; }
+        textarea { width: 100%; height: 100px; padding: 10px; border: 2px solid #2c5aa0; border-radius: 8px; box-sizing: border-box; }
+        label { display: block; margin: 15px 0 5px; font-weight: bold; }
+        button { background: #2c5aa0; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 20px; }
+        button:hover { background: #1e3f70; }
+        #saved { display: none; color: green; text-align: center; font-weight: bold; }
+        .back-btn { background: #6c757d; margin-top: 10px; }
+    </style>
 </head>
 <body>
-  <h1>Event</h1>
+    <h1>Event Entry</h1>
+    
+    <form id="eventForm">
+        <label>Symptoms & Behaviors (mental: anxiety/irritability; physical: headache/tension; behavioral: withdrawal/fidgeting)</label>
+        <textarea id="symptoms" placeholder="Describe symptoms, behaviors, and changes..." required></textarea>
+        
+        <label>Triggers & Stressors (events/thoughts before mood shift; external: work/social; internal: negative thoughts/illness)</label>
+        <textarea id="triggers" placeholder="Note triggers, situations, external/internal factors..." required></textarea>
+        
+        <label>Date & Time</label>
+        <input type="datetime-local" id="datetime" required>
+        
+        <button type="submit">Save Event</button>
+        <button type="button" class="back-btn" onclick="window.location.href='index.html'">Back to Dashboard</button>
+    </form>
+    
+    <div id="saved">Event saved locally!</div>
 
-  <div class="centered-button">
-    <a href="scenarios.html">
-      <button type="button">Scenario Prompts</button>
-    </a>
-  </div>
-
-  <!-- Date & Time -->
-  <h2>Date &amp; Time</h2>
-  <label for="eventDate">Date</label>
-  <input type="date" id="eventDate">
-  <label for="eventTime">Time</label>
-  <input type="time" id="eventTime">
-
-  <!-- Rest of your sections and script remain unchanged -->
-  <!-- (All your other sections and script below) -->
-</body>
-</html>
-
-
-  <!-- Overall Mood -->
-  <h2>Overall Mood</h2>
-  <label for="eventMoodRating">Rate 1–10</label>
-  <input type="number" id="eventMoodRating" min="1" max="10">
-  <label for="eventEmotions">What emotions do you feel?</label>
-  <textarea id="eventEmotions"></textarea>
-
-  <!-- Symptoms & Behaviors -->
-  <h2>Symptoms &amp; Behaviors</h2>
-  <label for="symptomsMental">
-    Describe any mental health symptoms. (anxiety, irritability, lack of motivation)
-  </label>
-  <textarea id="symptomsMental"></textarea>
-
-  <label for="symptomsPhysical">
-    Describe any physical symptoms. (headache, tension, appetite, energy)
-  </label>
-  <textarea id="symptomsPhysical"></textarea>
-
-  <label for="symptomsBehavioral">
-    Describe any behavioral changes. (withdrawal, activity changes, fidgeting)
-  </label>
-  <textarea id="symptomsBehavioral"></textarea>
-
-  <!-- Triggers & Stressors -->
-  <h2>Triggers &amp; Stressors</h2>
-  <label for="triggersBefore">
-    Events, situations, or thoughts before a shift in mood or symptoms.
-  </label>
-  <textarea id="triggersBefore"></textarea>
-
-  <label for="triggersExternal">
-    External factors. (work, social, environment)
-  </label>
-  <textarea id="triggersExternal"></textarea>
-
-  <label for="triggersInternal">
-    Internal factors. (thoughts, worries, physical illness)
-  </label>
-  <textarea id="triggersInternal"></textarea>
-
-  <!-- Coping & Intervention -->
-  <h2>Coping &amp; Intervention</h2>
-  <label for="copingActivities">
-    Self-care activities or coping mechanisms used. (walking, breathing, talking, hootin’ or hollerin’)
-  </label>
-  <textarea id="copingActivities"></textarea>
-
-  <label for="copingEffectiveness">
-    How effective were these in managing symptoms or improving mood?
-  </label>
-  <textarea id="copingEffectiveness"></textarea>
-
-  <div class="buttons">
-    <button type="button" onclick="saveEvent()">Save Event</button>
-    <button type="button" class="secondary" onclick="goBack()">Back to Dashboard</button>
-  </div>
-
-  <div id="savedMsg" class="saved-message"></div>
-
-  <script>
-    // ensure entries array exists
-    if (!localStorage.getItem('entries')) {
-      localStorage.setItem('entries', JSON.stringify([]));
-    }
-
-    function saveEvent() {
-      const date = document.getElementById('eventDate').value || new Date().toISOString().slice(0,10);
-      const time = document.getElementById('eventTime').value || '';
-      const moodRating = document.getElementById('eventMoodRating').value || null;
-      const emotions = document.getElementById('eventEmotions').value.trim();
-
-      const symptomsMental = document.getElementById('symptomsMental').value.trim();
-      const symptomsPhysical = document.getElementById('symptomsPhysical').value.trim();
-      const symptomsBehavioral = document.getElementById('symptomsBehavioral').value.trim();
-
-      const triggersBefore = document.getElementById('triggersBefore').value.trim();
-      const triggersExternal = document.getElementById('triggersExternal').value.trim();
-      const triggersInternal = document.getElementById('triggersInternal').value.trim();
-
-      const copingActivities = document.getElementById('copingActivities').value.trim();
-      const copingEffectiveness = document.getElementById('copingEffectiveness').value.trim();
-
-      if (
-        !emotions &&
-        !symptomsMental &&
-        !symptomsPhysical &&
-        !symptomsBehavioral &&
-        !triggersBefore &&
-        !triggersExternal &&
-        !triggersInternal &&
-        !copingActivities &&
-        !copingEffectiveness
-      ) {
-        alert('Add at least one detail about the event before saving.');
-        return;
-      }
-
-      const entries = JSON.parse(localStorage.getItem('entries'));
-      entries.push({
-        type: 'event',
-        date,
-        time,
-        mood: {
-          rating: moodRating ? Number(moodRating) : null,
-          emotions
-        },
-        symptoms: {
-          mental: symptomsMental,
-          physical: symptomsPhysical,
-          behavioral: symptomsBehavioral
-        },
-        triggers: {
-          before: triggersBefore,
-          external: triggersExternal,
-          internal: triggersInternal
-        },
-        coping: {
-          activities: copingActivities,
-          effectiveness: copingEffectiveness
-        }
-      });
-      localStorage.setItem('entries', JSON.stringify(entries));
-
-      document.getElementById('savedMsg').textContent = 'Event saved!';
-    }
-
-    function goBack() {
-      window.location.href = 'index.html';
-    }
-  </script>
+    <script>
+        // Load current time if empty
+        document.getElementById('datetime').valueAsDate = new Date();
+        
+        // Save to localStorage
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const entry = {
+                type: 'event',
+                datetime: document.getElementById('datetime').value,
+                symptoms: document.getElementById('symptoms').value,
+                triggers: document.getElementById('triggers').value
+            };
+            
+            let events = JSON.parse(localStorage.getItem('events') || '[]');
+            events.push(entry);
+            localStorage.setItem('events', JSON.stringify(events));
+            
+            document.getElementById('saved').style.display = 'block';
+            setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+        });
+    </script>
 </body>
 </html>
